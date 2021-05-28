@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "point-software": {
+      "hosting": {
+        "point-project": [
+          "point-software"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "point-software"
+  }
+}

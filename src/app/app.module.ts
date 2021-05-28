@@ -9,6 +9,9 @@ import { InformationCardComponent } from './components/information-card/informat
 import { CoreComponent } from './components/core/core.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+//firebase
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
 //loading component
 import { NgxLoadingModule } from 'ngx-loading';
 
@@ -18,7 +21,6 @@ import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 //material
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
-import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -34,8 +36,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     MatButtonModule,
     MatIconModule,
-    ReactiveFormsModule,
     GooglePlaceModule,
+    AngularFireModule.initializeApp(environment.firebase),
     NgxLoadingModule.forRoot({})
   ],
   providers: [],
