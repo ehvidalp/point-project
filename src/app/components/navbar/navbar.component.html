@@ -1,0 +1,45 @@
+<header>
+  <div
+    class="container"
+    [class.container--in--search]="markerAddress !== undefined"
+  >
+    <nav class="navbar">
+      <button mat-icon-button class="navbar__button--circle" type="button">
+        <mat-icon [inline]="true">circle</mat-icon>
+        <mat-icon [inline]="true">circle</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        class="navbar__button--menu"
+        class="navbar__button--menu"
+        type="button"
+      >
+        <mat-icon [inline]="true">menu</mat-icon>
+      </button>
+    </nav>
+    <div class="search">
+      <button class="search__button--back" mat-icon-button type="button">
+        <mat-icon [inline]="true">chevron_left</mat-icon>
+      </button>
+      <input
+        type="text"
+        #inputSearch
+        ngx-google-places-autocomplete
+        #placesRef="ngx-places"
+        (onAddressChange)="getAddress($event)"
+        class="search__input"
+        [class.search__input--active]="inputSearch.value !== ''"
+        placeholder="Ingresa una dirección"
+      />
+      <button
+        class="search__button--go"
+        [class.visible]="markerAddress !== undefined"
+        mat-icon-button
+        type="button"
+        (click)="newSearch()"
+        >
+        <mat-icon>travel_explore</mat-icon>
+      </button>
+    </div>
+  </div>
+</header>

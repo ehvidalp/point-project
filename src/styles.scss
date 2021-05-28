@@ -1,1 +1,27 @@
-/* You can add global styles to this file, and also import other style files */
+:root{
+  --primary-gradient: radial-gradient(68.47% 68.47% at 50% 31.53%, #2D9CDB 0%, #FB8EFD 100%);
+  --secondary-gradient: radial-gradient(111.72% 111.72% at 50% -11.72%, #2D9CDB 0%, #FB8EFD 100%);
+}
+
+//fonts
+@font-face {
+  font-family: karla;
+  src: url("/assets/fonts/Karla-Regular.ttf");
+}
+
+//defaul
+html,
+body {
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: karla;
+  margin: 0;
+  padding: 0;
+}
+
+//custom css
+.ml-1{
+  margin-left: 1rem;
+}
+
