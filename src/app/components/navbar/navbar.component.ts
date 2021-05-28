@@ -24,7 +24,7 @@ export class NavbarComponent implements OnInit {
   getAddress(address: Address) {
     this.markerAddress = address
     //send marker to core component
-    this.marker.emit(this.markerAddress)
+    this.marker.emit(address)
   }
 
   newSearch(){

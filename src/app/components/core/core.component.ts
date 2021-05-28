@@ -1,3 +1,4 @@
+import { Marker } from 'src/app/interfaces/marker';
 import { Component, OnInit } from '@angular/core';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
 
@@ -7,7 +8,9 @@ import { Address } from 'ngx-google-places-autocomplete/objects/address';
   styleUrls: ['./core.component.scss']
 })
 export class CoreComponent implements OnInit {
-  marker!: Address
+  marker!: Address;
+  markerInfo!: Address;
+  markersDistances: Partial<Marker>[] = [];
 
   constructor() { }
 
@@ -18,4 +21,11 @@ export class CoreComponent implements OnInit {
     this.marker = adress
   }
 
+  getInfoMarker(markerInfo: Address){
+    this.markerInfo = markerInfo;
+  }
+
+  getMarkersDistances(markersDitances: Partial<Marker>[]){
+    this.markersDistances = markersDitances
+  }
 }

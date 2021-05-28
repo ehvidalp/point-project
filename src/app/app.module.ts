@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //firebase
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
+
 //loading component
 import { NgxLoadingModule } from 'ngx-loading';
 
