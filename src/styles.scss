@@ -20,8 +20,10 @@ body {
   padding: 0;
 }
 
-//custom css
-.ml-1{
-  margin-left: 1rem;
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+	select:focus,
+	textarea:focus,
+	input:focus {
+		font-size: 16px;
+	}
 }
-

@@ -10,6 +10,9 @@ import { Address } from 'ngx-google-places-autocomplete/objects/address';;
 export class InformationCardComponent implements OnInit {
   @Input() markerInfo!: Address;
   @Input() markersDistances: Partial<Marker>[] = [];
+  likeMarker = false;
+  showFullCard = false;
+  showDistances = false;
 
   constructor() { }
 
@@ -17,13 +20,12 @@ export class InformationCardComponent implements OnInit {
 
   }
 
-   //changes in get markerInfo variable or mardersDistances
+   //changes in get markerInfo or markersDistances
    ngOnChanges(changes: SimpleChanges): void {
-    if (changes.markerInfo.currentValue) {
-      if (this.markerInfo !== undefined) {
-        console.log('info we',this.markerInfo)
-        console.log('distances',this.markersDistances)
-      }
+    if(this.markerInfo === undefined) {
+      this.likeMarker = false;
+      this.showFullCard = false;
+      this.showDistances = false;
     }
   }
 }

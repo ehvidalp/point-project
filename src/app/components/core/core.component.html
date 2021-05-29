@@ -1,3 +1,10 @@
 <navbar (marker)="getMarker($event)"></navbar>
-<map [getMarker]="marker" (inforMarker)="getInfoMarker($event)" (markersDistances)="getMarkersDistances($event)"></map>
-<information-card [markersDistances]="markersDistances" [markerInfo]="markerInfo" ></information-card>
+<map
+  [getMarker]="marker"
+  (inforMarker)="getInfoMarker($event)"
+  (markersDistances)="getMarkersDistances($event)"
+></map>
+<information-card
+  [markersDistances]="markersDistances"
+  [markerInfo]="markerInfo"
+></information-card>

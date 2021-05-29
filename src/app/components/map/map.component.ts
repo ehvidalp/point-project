@@ -14,8 +14,6 @@ export class MapComponent implements OnInit {
   @Output() markersDistances = new EventEmitter<Partial<Marker>[]>();
   @Output() inforMarker = new EventEmitter<Address>();
 
-
-
   loading: boolean = true;
   map = null;
   defaultMarker: Partial<Marker> = { position: { lat: 14.604697599999998, lng: -90.5347072 } }
@@ -70,6 +68,7 @@ export class MapComponent implements OnInit {
       })
 
     });
+    this.sendDataToCard(undefined, undefined)
   }
 
   addMarker(address: Address, iconUrl: string) {
@@ -96,9 +95,12 @@ export class MapComponent implements OnInit {
           travelMode: google.maps.TravelMode.DRIVING
         }, (response: any, status: any) => {
           if (status === google.maps.DirectionsStatus.OK) {
-            const distance = response.routes[0].legs[0].distance.value
-            if (distance !== '1 m')
-              dataDistances.push({ distanceFromOrigin: distance, title: address.name, photo: address.photos[0].getUrl({ maxHeight: 100, maxWidth: 100 }) })
+            const distance = response.routes[0].legs[0].distance.text
+            const distanceMts = response.routes[0].legs[0].distance.value
+            if (distanceMts !== 0) {
+              const photo = (address.photos !== undefined) ? true : false
+              dataDistances.push({ distanceFromOrigin: distance, title: address.name, photo: (photo) ? address.photos[0].getUrl({ maxHeight: 100, maxWidth: 100 }) : undefined })
+            }
           }
         })
       })
@@ -107,9 +109,9 @@ export class MapComponent implements OnInit {
     this.sendDataToCard(origin, dataDistances)
   }
 
-  sendDataToCard(infoMarker: Address, markersDistances: Marker[]) {
-    this.inforMarker.emit(infoMarker)
-    this.markersDistances.emit(markersDistances)
+  sendDataToCard(infoMarker?: Address, markersDistances?: Marker[]) {
+    this.inforMarker.emit(infoMarker);
+    this.markersDistances.emit(markersDistances);
   }
 
 }

@@ -28,4 +28,5 @@ export class CoreComponent implements OnInit {
   getMarkersDistances(markersDitances: Partial<Marker>[]){
     this.markersDistances = markersDitances
   }
+
 }

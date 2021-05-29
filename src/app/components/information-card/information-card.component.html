@@ -1,1 +1,131 @@
-<p>information-card works!</p>
+<div
+  class="container"
+  [class.container-extended]="showFullCard"
+  *ngIf="markerInfo !== undefined"
+>
+  <div
+    *ngIf="!showDistances; else cardDistances"
+    class="card w3-animate-bottom"
+    [class.card-custom]="showFullCard"
+    [class.w3-animate-bottom]="showFullCard"
+  >
+    <div class="border-top"></div>
+    <div class="card__header">
+      <div class="card__title">
+        <h1>{{ markerInfo?.name }}</h1>
+        <h2>{{ markerInfo?.vicinity || markerInfo?.formatted_address }}</h2>
+      </div>
+      <button
+        type="button"
+        *ngIf="markerInfo !== undefined"
+        class="button-like"
+        (click)="likeMarker = !likeMarker"
+        [class.like]="likeMarker"
+        mat-icon-button
+      >
+        <mat-icon>
+          {{ likeMarker ? "favorite" : "favorite_border" }}
+        </mat-icon>
+      </button>
+      <div class="card__photo">
+        <img
+          [src]="
+            markerInfo.photos !== undefined
+              ? markerInfo.photos[0].getUrl({ maxHeight: 200, maxWidth: 200 })
+              : 'assets/svg/x-circle.svg'
+          "
+        />
+      </div>
+    </div>
+    <div class="card__more-info">
+      <button
+        type="button"
+        (click)="showFullCard = !showFullCard"
+        type="button"
+        class="button-show-more"
+        mat-flat-button
+      >
+        {{ !showFullCard ? "Ver más" : "Ver menos" }}
+      </button>
+    </div>
+    <div *ngIf="showFullCard" class="card__perfil">
+      <div class="card__perfil-item">
+        <div class="card__perfil-img">
+          <img src="assets/svg/flower.svg" />
+        </div>
+        <div class="card__perfil-info info-flower">
+          <div class="info-selected">1</div>
+          2 3 4
+        </div>
+      </div>
+      <div class="card__perfil-item">
+        <div class="card__perfil-img">
+          <img src="assets/svg/house.svg" />
+        </div>
+        <div class="card__perfil-info info-house">
+          1 2
+          <div class="info-selected">3</div>
+          4
+        </div>
+      </div>
+      <div class="card__perfil-item">
+        <div class="card__perfil-img adjust-plant">
+          <img src="assets/svg/plant.svg" />
+        </div>
+        <div class="card__perfil-info info-plant">
+          <div class="info-selected">1</div>
+          2 3 4
+        </div>
+      </div>
+      <div class="card__perfil-item">
+        <div class="card__perfil-img">
+          <img src="assets/svg/build.svg" />
+        </div>
+        <div class="card__perfil-info info-build">
+          <div class="info-selected">1</div>
+          2 3 4
+        </div>
+      </div>
+    </div>
+    <div *ngIf="showFullCard" class="card__info-aditional">
+      <div>Particular subvencionado</div>
+      <div>Pre Kinder a IV</div>
+    </div>
+    <button
+      type="button"
+      *ngIf="showFullCard && markersDistances.length > 0"
+      (click)="showDistances = true"
+      mat-stroked-button
+      class="button-distances"
+    >
+      Ver distancias con los otros marcadores
+    </button>
+  </div>
+  <ng-template #cardDistances>
+    <div class="card card-custom w3-animate-left">
+      <div class="border-top"></div>
+      <button
+        type="button"
+        class="button-distances"
+        mat-stroked-button
+        (click)="showDistances = false"
+      >
+        Regresar
+      </button>
+      <div class="card__header">
+        <div class="card__title card-margin">
+          <h1>Origen <mat-icon class="icon-room">room</mat-icon></h1>
+          <h2 class="-mt-1"> {{ markerInfo?.name }}</h2>
+        </div>
+      </div>
+      <ul>
+        <li *ngFor="let marker of markersDistances">
+          <span>
+            {{ marker.title }} esta a
+            {{ marker.distanceFromOrigin }}
+          </span>
+        </li>
+      </ul>
+    </div>
+  </ng-template>
+</div>
