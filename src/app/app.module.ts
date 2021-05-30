@@ -9,6 +9,9 @@ import { InformationCardComponent } from './components/information-card/informat
 import { CoreComponent } from './components/core/core.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+//sweet alert
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+
 //firebase
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
@@ -39,7 +42,8 @@ import {MatIconModule} from '@angular/material/icon';
     MatIconModule,
     GooglePlaceModule,
     AngularFireModule.initializeApp(environment.firebase),
-    NgxLoadingModule.forRoot({})
+    NgxLoadingModule.forRoot({}),
+    SweetAlert2Module.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

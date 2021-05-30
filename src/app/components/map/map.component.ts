@@ -16,7 +16,7 @@ export class MapComponent implements OnInit {
 
   loading: boolean = true;
   map = null;
-  defaultMarker: Partial<Marker> = { position: { lat: 14.604697599999998, lng: -90.5347072 } }
+  defaultMarker: Partial<Marker> = { position: { lat: 14.604697599999998, lng: -90.5147555 } }
   addresses: Address[] = []
   directionsService = new google.maps.DirectionsService();
 
@@ -28,13 +28,15 @@ export class MapComponent implements OnInit {
 
   //changes in get marker variable
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.getMarker.currentValue) {
       if (this.getMarker !== undefined) {
-        //add address to addresses array
-        this.addresses.push(this.getMarker)
-        this.loadMap(true)
+        this.addresses.push(this.getMarker);
+        this.loadMap(true);
       }
-    }
+      else {
+        this.addresses = [];
+        this.sendDataToCard(undefined, undefined);
+        this.loadMap();
+      }
   }
 
   loadMap(isAddMarker: boolean = false) {
@@ -43,7 +45,7 @@ export class MapComponent implements OnInit {
 
     this.map = new google.maps.Map(mapElement, {
       center: isAddMarker ? this.addresses[this.addresses.length - 1].geometry.location : this.defaultMarker.position,
-      zoom: 15,
+      zoom: 17,
       disableDefaultUI: true,
       mapId: '6fcd2e28f7ef88af' //map id from google maps
     });
@@ -92,7 +94,7 @@ export class MapComponent implements OnInit {
         await this.directionsService.route({
           origin: { lat: origin.geometry.location.lat(), lng: origin.geometry.location.lng() },
           destination: { lat: address.geometry.location.lat(), lng: address.geometry.location.lng() },
-          travelMode: google.maps.TravelMode.DRIVING
+          travelMode: google.maps.TravelMode.WALKING
         }, (response: any, status: any) => {
           if (status === google.maps.DirectionsStatus.OK) {
             const distance = response.routes[0].legs[0].distance.text

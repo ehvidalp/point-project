@@ -17,10 +17,12 @@
         <mat-icon [inline]="true">menu</mat-icon>
       </button>
     </nav>
+    <swal #swal></swal>
     <div class="search">
-      <button class="search__button--back" mat-icon-button type="button">
+      <button [class.visible]="isSearched" [class.w3-animate-left]="isSearched" (click)="confirmationDeleteMarkers()" class="search__button--back" mat-icon-button type="button">
         <mat-icon [inline]="true">chevron_left</mat-icon>
       </button>
+
       <input
         type="text"
         #inputSearch
@@ -33,12 +35,13 @@
       />
       <button
         class="search__button--go"
-        [class.visible]="markerAddress !== undefined"
+        [class.visible]="isSearched"
+        [class.w3-animate-right]="isSearched"
         mat-icon-button
         type="button"
         (click)="newSearch()"
         >
-        <mat-icon>travel_explore</mat-icon>
+        <mat-icon>add</mat-icon>
       </button>
     </div>
   </div>

@@ -1,5 +1,5 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
 
@@ -10,11 +10,10 @@ import { Address } from 'ngx-google-places-autocomplete/objects/address';
 })
 export class NavbarComponent implements OnInit {
   @ViewChild("placesRef") placesRef!: GooglePlaceDirective;
-  @Output() marker = new EventEmitter<Address>();
+  @Output() marker = new EventEmitter<Address>()
   @ViewChild("inputSearch") inputSearch!: ElementRef;
-
+  isSearched = false;
   markerAddress: Address | undefined;
-
 
   constructor() { }
 
@@ -23,8 +22,11 @@ export class NavbarComponent implements OnInit {
 
   getAddress(address: Address) {
     this.markerAddress = address
-    //send marker to core component
-    this.marker.emit(address)
+    if(address.url === undefined) Swal.fire('Por favor ingrese una dirección correcta');
+    else {
+      this.marker.emit(address);
+      this.isSearched = true;
+    }
   }
 
   newSearch(){
@@ -32,4 +34,22 @@ export class NavbarComponent implements OnInit {
     this.inputSearch.nativeElement.value = ''
   }
 
+  confirmationDeleteMarkers() {
+    Swal.fire({
+      title: '¿Está seguro que desea borrar todos los marcadores?',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+      icon: 'warning',
+      confirmButtonText: 'Aceptar',
+      cancelButtonColor: '#373b3a',
+      confirmButtonColor: '#1556f9',
+      reverseButtons: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.inputSearch.nativeElement.value = ''
+        this.marker.emit(undefined)
+        this.isSearched = false;
+      }
+    });
+  }
 }

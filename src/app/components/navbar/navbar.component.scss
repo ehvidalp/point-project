@@ -116,13 +116,16 @@ button {
 
 
   &__button--back {
+    visibility: hidden;
     border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   &__button--go {
     visibility: hidden;
     background-color: #f2c94c;
-    font-family: karla;
   }
 
 }
