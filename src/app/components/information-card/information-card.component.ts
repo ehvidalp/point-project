@@ -28,4 +28,5 @@ export class InformationCardComponent implements OnInit {
       this.showDistances = false;
     }
   }
+
 }
